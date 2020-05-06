@@ -1,0 +1,41 @@
+.home-container {
+  background-image: url("../../oval-bg.png");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 10rem 14rem;
+}
+
+.main-title {
+  font-size: 4rem;
+  font-weight: bold;
+  color: rgb(138, 223, 205);
+}
+
+.home-paragraph {
+  margin-top: 5rem;
+  width: 30vw;
+  font-size: 3rem;
+  line-height: 3.7rem;
+  color: rgb(44, 107, 91);
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  margin-top: 10rem;
+  margin-left: 4rem;
+}
+
+.button-container button {
+  font-size: 1.8rem;
+  font-weight: bold;
+  padding: 1.4rem 10rem;
+  margin-bottom: 3rem;
+  border: 0;
+  border-radius: 0.5rem;
+  color: rgb(42, 124, 99);
+  background-color: rgb(189, 220, 235);
+}
