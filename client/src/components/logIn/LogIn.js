@@ -1,29 +1,25 @@
 import React, { Component } from 'react';
 import AuthService from '../../services/authService';
 import { Link } from 'react-router-dom';
-import './SignUp.css';
+import './LogIn.css';
 
-class SignUp extends Component {
+class LogIn extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      username: '',
-      password: ''
-    };
+    this.state = { username: '', password: '' };
     this.service = new AuthService();
-    this.campus = this.props.campus;
-    this.courses = this.props.courses;
   }
 
   handleFormSubmit = (event) => {
     event.preventDefault();
     const username = this.state.username;
     const password = this.state.password;
-    this.service.signup(username, password)
+
+    this.service.login(username, password)
       .then(response => {
         this.setState({
           username: "",
-          password: ""
+          password: "",
         });
         this.props.getUser(response)
       })
@@ -36,8 +32,6 @@ class SignUp extends Component {
   }
 
   render() {
-    console.log(this.campus)
-    console.log(this.courses)
     return (
       <div className="form-container">
         <form onSubmit={this.handleFormSubmit}>
@@ -54,13 +48,9 @@ class SignUp extends Component {
             value={this.state.password}
             onChange={e => this.handleChange(e)}
           />
-          <label>Campus:</label>
-          <select name="campus">
-            <option value=""></option>
-          </select>
-          <input type="submit" value="Sign up" className="submit" />
-          <p className="added-paragraph">Already have account?
-            <Link to={"/logIn"} className="link">  Log in</Link>
+          <input type="submit" value="Log in" className="submit" />
+          <p className="added-paragraph">Don't you have an account?
+            <Link to={"/signUp"} className="link">  Sign up</Link>
           </p>
         </form>
       </div>
@@ -68,4 +58,4 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+export default LogIn;

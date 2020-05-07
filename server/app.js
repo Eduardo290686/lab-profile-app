@@ -61,8 +61,10 @@ app.use(passport.session());
 
 /* Declaramos nuestras rutas. */
 const authRoutes = require('./routes/auth-routes');
+const infoRoutes = require('./routes/info-routes');
 /* Utilizamos el "router" correspondiente a esas rutas. */
-app.use('/api', authRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/info', infoRoutes);
 
 /* Exportamos app para poder, en este caso, usarlo en
 el archivo www, que se encuentra dentro del directorio

@@ -29,7 +29,11 @@
   margin-left: 4rem;
 }
 
-.button-container button {
+.link-container {
+  text-decoration: none;
+}
+
+.login-signup-container {
   font-size: 1.8rem;
   font-weight: bold;
   padding: 1.4rem 10rem;
