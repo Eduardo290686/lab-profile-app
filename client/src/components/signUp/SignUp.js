@@ -1,71 +1,132 @@
 import React, { Component } from 'react';
+import { withRouter } from "react-router-dom";
 import AuthService from '../../services/authService';
 import { Link } from 'react-router-dom';
+import NavBar from '../navBar/NavBar'
 import './SignUp.css';
 
 class SignUp extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      username: '',
-      password: ''
-    };
     this.service = new AuthService();
     this.campus = this.props.campus;
     this.courses = this.props.courses;
+    this.state = {
+      username: '',
+      password: '',
+      campusCity: this.campus[0].city,
+      courseName: this.courses[0].name
+    };
+  }
+
+  handleName = (event) => {
+    this.setState({
+      username: event.target.value
+    })
+  }
+
+  handlePassword = (event) => {
+    this.setState({
+      password: event.target.value
+    })
+  }
+
+  handleCampus = (event) => {
+    this.setState({
+      campusCity: event.target.value
+    })
+  }
+
+  handleCourse = (event) => {
+    this.setState({
+      courseName: event.target.value
+    })
   }
 
   handleFormSubmit = (event) => {
     event.preventDefault();
     const username = this.state.username;
     const password = this.state.password;
-    this.service.signup(username, password)
+    const campus = this.state.campusCity;
+    const course = this.state.courseName;
+    this.service.signup(username, password, campus, course)
       .then(response => {
         this.setState({
           username: "",
-          password: ""
+          password: "",
+          campusCity: "",
+          courseName: ""
         });
-        this.props.getUser(response)
+        this.props.getUser(response);
+        this.props.history.push("/profile");
       })
       .catch(error => console.log(error))
   }
 
-  handleChange = (event) => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
-  }
-
   render() {
-    console.log(this.campus)
-    console.log(this.courses)
     return (
-      <div className="form-container">
-        <form onSubmit={this.handleFormSubmit}>
-          <label>Username:</label>
-          <input
-            type="text"
-            name="username"
-            value={this.state.username}
-            onChange={e => this.handleChange(e)}
-          />
-          <label>Password:</label>
-          <input
-            name="password"
-            value={this.state.password}
-            onChange={e => this.handleChange(e)}
-          />
-          <label>Campus:</label>
-          <select name="campus">
-            <option value=""></option>
-          </select>
-          <input type="submit" value="Sign up" className="submit" />
-          <p className="added-paragraph">Already have account?
+      <div>
+        <NavBar></NavBar>
+        <div className="form-container">
+          <form onSubmit={this.handleFormSubmit}>
+            <label>Username:</label>
+            <input
+              type="text"
+              name="username"
+              value={this.state.username}
+              onChange={event => this.handleName(event)}
+            />
+            <label>Password:</label>
+            <input
+              name="password"
+              value={this.state.password}
+              onChange={event => this.handlePassword(event)}
+            />
+            <label>Campus:</label>
+            <select
+              name="campus"
+              onChange={event => this.handleCampus(event)}
+            >
+              {
+                this.campus.map((oneCampus, idx) => {
+                  return (
+                    <option
+                      value={oneCampus.city}
+                      key={idx}
+                    >
+                      {oneCampus.city}
+                    </option>
+                  )
+                })
+              }
+            </select>
+            <label>Course:</label>
+            <select
+              name="course"
+              onChange={event => this.handleCourse(event)}
+            >
+              {
+                this.courses.map((oneCourse, idx) => {
+                  return (
+                    <option
+                      value={oneCourse.name}
+                      key={idx}
+                    >
+                      {oneCourse.name}
+                    </option>
+                  )
+                })
+              }
+            </select>
+            <input type="submit" value="Sign up" className="submit" />
+            <p className="added-paragraph">Already have account?
             <Link to={"/logIn"} className="link">  Log in</Link>
-          </p>
-        </form>
+            </p>
+          </form>
+        </div>
       </div>
     )
   }
 }
 
-export default SignUp;
+export default withRouter(SignUp);

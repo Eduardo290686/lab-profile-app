@@ -1,0 +1,16 @@
+nav {
+  background: rgb(162, 223, 204);
+  display: flex;
+  justify-content: flex-end;
+  padding: 2rem 8rem;
+}
+
+.nav-link {
+  font-size: 2rem;
+  text-decoration: none;
+  color: rgb(79, 192, 173);
+  padding: 0.5rem 0.8rem;
+  background: rgb(255, 255, 255);
+  border: 3px solid rgb(168, 168, 204);
+  border-radius: 1rem;
+}

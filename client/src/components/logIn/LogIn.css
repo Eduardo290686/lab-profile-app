@@ -1,7 +1,13 @@
 .form-container {
   display: flex;
   justify-content: center;
-  margin-top: 15rem;
+  margin-top: 12rem;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 7rem;
 }
 
 .form-container form {

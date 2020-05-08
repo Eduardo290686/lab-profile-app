@@ -11,6 +11,8 @@ de que el registro se realice de manera efectiva. */
 authRoutes.post('/signup', (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
+  const userCampus = req.body.campus;
+  const userCourse = req.body.course;
 
   if (!username || !password) {
     res.status(400).json({ message: 'Provide username and password' });
@@ -41,7 +43,9 @@ authRoutes.post('/signup', (req, res, next) => {
 
     const aNewUser = new User({
       username: username,
-      password: hashPass
+      password: hashPass,
+      campus: userCampus,
+      course: userCourse
     });
 
     aNewUser.save(err => {
@@ -56,7 +60,7 @@ authRoutes.post('/signup', (req, res, next) => {
           res.status(500).json({ message: 'Login after signup went bad.' })
           return;
         }
-
+        console.log(`User ${aNewUser.username} has created an account and is already logged.`)
         res.status(200).json(aNewUser);
       });
     });
@@ -94,6 +98,7 @@ authRoutes.post('/login', (req, res, next) => {
 authRoutes.post('/logout', (req, res, next) => {
   // req.logout() está definido por Passport.
   req.logout();
+  console.log('User has been logged out.')
   res.status(200).json({ message: 'Log out success!' });
 });
 

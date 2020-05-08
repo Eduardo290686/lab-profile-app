@@ -1,7 +1,7 @@
 .form-container {
   display: flex;
   justify-content: center;
-  margin-top: 15rem;
+  margin-top: 7rem;
 }
 
 .form-container form {
@@ -34,4 +34,11 @@
 
 .link {
   text-decoration: none;
+}
+
+select {
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+  width: 15rem;
 }

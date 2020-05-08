@@ -8,7 +8,6 @@ passport.serializeUser((user, next) => {
 });
 
 passport.deserializeUser((id, next) => {
-  console.log("Using passport.");
   User.findById(id)
     .then(user => next(null, user))
     .catch(next)
