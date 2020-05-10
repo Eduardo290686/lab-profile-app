@@ -14,11 +14,15 @@ class App extends Component {
     super(props)
     this.state = {
       loggedInUser: null,
+      userId: ""
     };
     this.authService = new AuthService();
     this.infoService = new InfoService();
     this.campus = [];
     this.courses = [];
+    this.getCampus()
+    this.getCourses()
+    this.fetchUser()
   }
 
   fetchUser() {
@@ -69,17 +73,30 @@ class App extends Component {
       .catch(err => console.log(err));
   };
 
+  updateId = (id) => {
+    this.setState({
+      userId: id
+    })
+  }
+
   render() {
-    this.getCampus()
-    this.getCourses()
-    this.fetchUser()
     if (this.state.loggedInUser) {
       return (
         <div className="App">
           <Switch>
             <Route
               exact path='/profile'
-              render={() => { return (<Profile logOut={this.logOut}></Profile>) }}
+              render={
+                () => {
+                  return (
+                    <Profile
+                      logOut={this.logOut}
+                      userId={this.state.userId}
+                    >
+                    </Profile>
+                  )
+                }
+              }
             />
           </Switch>
         </div>
@@ -91,13 +108,28 @@ class App extends Component {
             <Route
               exact path='/'
               render={
-                () => { return (<Home getUser={this.getTheUser}></Home>) }
+                () => {
+                  return (
+                    <Home
+                      getUser={this.getTheUser}
+                    >
+                    </Home>
+                  )
+                }
               }
             />
             <Route
               exact path='/logIn'
               render={
-                () => { return (<LogIn getUser={this.getTheUser}></LogIn>) }
+                () => {
+                  return (
+                    <LogIn
+                      getUser={this.getTheUser}
+                      updateId={this.updateId}
+                    >
+                    </LogIn>
+                  )
+                }
               }
             />
             <Route
@@ -109,6 +141,7 @@ class App extends Component {
                       getUser={this.getTheUser}
                       campus={this.campus}
                       courses={this.courses}
+                      updateId={this.updateId}
                     >
                     </SignUp>
                   )

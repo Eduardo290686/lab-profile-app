@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import AuthService from '../../services/authService';
 import { Link } from 'react-router-dom';
-import NavBar from '../navBar/NavBar'
+import NavBar from '../navBar/NavBar';
 import './SignUp.css';
 
 class SignUp extends Component {
@@ -58,6 +58,7 @@ class SignUp extends Component {
           courseName: ""
         });
         this.props.getUser(response);
+        this.props.updateId(response._id);
         this.props.history.push("/profile");
       })
       .catch(error => console.log(error))

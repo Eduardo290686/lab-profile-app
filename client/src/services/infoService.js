@@ -22,6 +22,12 @@ class InfoService {
       .then(response => response.data)
   }
 
+  getUser = (id) => {
+    let userId = id
+    return this.service.get(`/getUser/${userId}`)
+      .then(response => response.data)
+  }
+
 }
 
 export default InfoService;

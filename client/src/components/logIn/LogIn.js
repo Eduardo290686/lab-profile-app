@@ -16,7 +16,6 @@ class LogIn extends Component {
     event.preventDefault();
     const username = this.state.username;
     const password = this.state.password;
-
     this.service.login(username, password)
       .then(response => {
         this.setState({
@@ -24,6 +23,7 @@ class LogIn extends Component {
           password: "",
         });
         this.props.getUser(response);
+        this.props.updateId(response._id);
         this.props.history.push("/profile");
       })
       .catch(error => console.log(error))
